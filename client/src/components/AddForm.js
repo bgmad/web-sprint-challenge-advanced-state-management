@@ -1,8 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { postSmurf } from '../actions/index';
+
 
 class AddForm extends React.Component {
 
     render() {
+        this.props.postSmurf({
+            name: "Brainey",
+            nickname: '200',
+            position: "5cm",
+            description: "aoeu",
+            id: 0
+          })
         return(<section>
             <h2>Add Smurf</h2>
             <form>
@@ -18,7 +29,11 @@ class AddForm extends React.Component {
     }
 }
 
-export default AddForm;
+const mapStateToProps = state => {
+    return {};
+}
+
+export default connect(mapStateToProps, { postSmurf })(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.

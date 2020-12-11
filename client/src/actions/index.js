@@ -1,5 +1,30 @@
 import axios from 'axios';
 
+const ACTION = {
+    FETCH_INITIATE: 'FETCH_INITIATE',
+    FETCH_SUCCESS: 'FETCH_SUCCESS',
+    FETCH_FAIL: 'FETCH_FAIL',
+    ADD_SMURF: 'ADD_SMURF',
+    SET_ERROR: 'SET_ERROR'
+}
+
+export const fetchSmurfs = () => dispatch => {
+    dispatch({type: ACTION.FETCH_INITIATE});
+    axios
+        .get('http://localhost:3333/smurfs')
+        .then(res => dispatch({type: ACTION.FETCH_SUCCESS, payload: res.data}))
+        .catch(err => dispatch({type: ACTION.FETCH_FAIL, payload: err}));
+} 
+
+export const postSmurf = smurfData => dispatch => {
+    dispatch({type: ACTION.FETCH_INITIATE});
+    axios
+        .post('http://localhost:3333/smurfs', smurfData)
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+}
+
+export default ACTION;
 //Task List:
 //1. Add fetch smurfs action: 
 //              - fetch and return initial list of smurfs
