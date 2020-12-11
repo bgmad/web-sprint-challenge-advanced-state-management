@@ -39,7 +39,6 @@ class AddForm extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         return(<section>
             <h2>Add Smurf</h2>
             <form onSubmit={this.handleSubmit}>
@@ -66,7 +65,7 @@ class AddForm extends React.Component {
                         id="nickname"
                     />
                     <label htmlFor="description">Description:</label><br/>
-                    <input 
+                    <textarea 
                         value={this.props.form.description} 
                         onChange={this.handleChange} 
                         name={INPUT_NAME.DESCRIPTION} 
