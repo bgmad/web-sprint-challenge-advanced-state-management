@@ -1,11 +1,20 @@
 import axios from 'axios';
 
 const ACTION = {
+    //api action types
     FETCH_INITIATE: 'FETCH_INITIATE',
     FETCH_SUCCESS: 'FETCH_SUCCESS',
     FETCH_FAIL: 'FETCH_FAIL',
     ADD_SMURF: 'ADD_SMURF',
-    SET_ERROR: 'SET_ERROR'
+    SET_ERROR: 'SET_ERROR',
+
+    //form action types
+    NEW_SMURF_NAME: 'NEW_SMURF_NAME',
+    NEW_SMURF_POSITION: 'NEW_SMURF_POSITION',
+    NEW_SMURF_NICKNAME: 'NEW_SMURF_NICKNAME',
+    NEW_SMURF_DESCRIPTION: 'NEW_SMURF_DESCRIPTION',
+    CLEAR_FORM: 'CLEAR_FORM',
+
 }
 
 export const fetchSmurfs = () => dispatch => {
@@ -20,8 +29,24 @@ export const postSmurf = smurfData => dispatch => {
     dispatch({type: ACTION.FETCH_INITIATE});
     axios
         .post('http://localhost:3333/smurfs', smurfData)
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
+        .then(res => dispatch({type: ACTION.FETCH_SUCCESS, payload: res.data}))
+        .catch(err => dispatch({type: ACTION.FETCH_FAIL, payload: err.response.data.Error}));
+}
+
+export const setSmurfName = value => {
+    return {type: ACTION.NEW_SMURF_NAME, payload: value}
+}
+export const setSmurfPosition = value => {
+    return {type: ACTION.NEW_SMURF_POSITION, payload: value}
+}
+export const setSmurfNickname = value => {
+    return {type: ACTION.NEW_SMURF_NICKNAME, payload: value}
+}
+export const setSmurfDescription = value => {
+    return {type: ACTION.NEW_SMURF_DESCRIPTION, payload: value}
+}
+export const clearForm = () => {
+    return {type: ACTION.CLEAR_FORM};
 }
 
 export default ACTION;

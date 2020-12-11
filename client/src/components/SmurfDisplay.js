@@ -21,8 +21,8 @@ export class SmurfDisplay extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        smurfs: state.smurfs,
-        isLoading: state.isLoading
+        smurfs: state.apiReducer.smurfs,
+        isLoading: state.apiReducer.isLoading
     }
 }
 
